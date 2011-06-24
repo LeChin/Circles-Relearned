@@ -1,47 +1,49 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	<title>Circles for ALL!</title>
-	
-	<script type="text/javascript">
-		window.onload = function() {
-			drawCircle(makeCircle());
-		};
-				
-		function makeCircle(){
-			var circle = {
-				x: 10 + Math.floor(Math.random() * 491),
-				y: 10 + Math.floor(Math.random() * 491),
-				radius: 5 + Math.floor(Math.random() * 50),
-				color: "rgb(" + Math.floor(Math.random() * 255)+ "," + Math.floor(Math.random() * 255)+ "," + Math.floor(Math.random() * 255) + ")"	
-			};	
-			
-			return circle;
-		}
-		
-		var drawCircle = function(circle2) {
-			var canvas = document.getElementById('circles');
-			var guy = canvas.getContext('2d');
-
-			guy.fillStyle = circle2.color;
-			guy.beginPath();
-			guy.arc(circle2.x, circle2.y, circle2.radius, 0, Math.Pi*2, true);
-			guy.closePath();
-			guy.fill();
-		};
-		
-		
-	</script>
-</head>	
+    <title>Circles for ALL!</title>
+</head> 
 
 <body>
 
-	<canvas id="circles" height="500" width="500">
-		<p>get a better browser, idiot. Firefox is nice...</p>
-	</canvas>
+    <canvas id="circles" height="500" width="500" style="background:#000000">
+        <p>get a better browser, idiot. Firefox is nice...</p>
+    </canvas>
 
 </body>
 
+    
+    <script type="text/javascript">
+        var canvas = document.getElementById('circles');
+        var guy = canvas.getContext('2d');
+
+        var makeCircle = function(){
+            var circle = {
+                x: 10 + Math.floor(Math.random() * 491),
+                y: 10 + Math.floor(Math.random() * 491),
+                radius: 5 + Math.floor(Math.random() * 100),
+                color: "rgb(" + Math.floor(Math.random() * 255)+ "," + Math.floor(Math.random() * 255)+ "," + Math.floor(Math.random() * 255) + ")"    
+            };  
+            
+            return circle;
+        };
+        
+        var drawCircle = function(circle) {
+            console.log(Math.PI);
+            console.log(circle);
+
+            guy.fillStyle = circle.color;
+            guy.beginPath();
+            guy.arc(circle.x, circle.y, circle.radius, 0, Math.PI*2, true);
+            guy.closePath();
+            guy.fill();
+        };
+        
+        window.onload = function() {
+            drawCircle(makeCircle());
+        };
+                
+    </script>
 
 
 </html>
