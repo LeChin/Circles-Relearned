@@ -20,12 +20,17 @@
         var canvas = document.getElementById('circles');
         var guy = canvas.getContext('2d');
 		
-		var circles = [];  //makes an array called circles        
+	
+		var circles = [];  //makes an array called circles  
+	
+	var randomPosition = function(){
+	      return 10 + Math.floor(Math.random() * 491);
+	};
 
-        var makeCircle = function(){ //this function stores the circle variable and all the elements needed to draw a random circle
+        var makeCircle = function(x,y){ //this function stores the circle variable and all the elements needed to draw a random circle
             var circle = {
-                x: 10 + Math.floor(Math.random() * 491),
-                y: 10 + Math.floor(Math.random() * 491),
+	        x: x, 
+                y: y,
                 radius: 5 + Math.floor(Math.random() * 100),
                 color: "rgb(" + Math.floor(Math.random() * 255)+ "," + Math.floor(Math.random() * 255)+ "," + Math.floor(Math.random() * 255) + ")"
             };
@@ -35,8 +40,8 @@
 
 
         var drawCircle = function(circle) { //when called below, this function draws a random circle using the makeCircle function above
-            console.log(Math.PI); //we can see what's going on in the browser with console
-            console.log(circle);
+            //console.log(Math.PI); //we can see what's going on in the browser with console
+            //console.log(circle);
 
             guy.fillStyle = circle.color;
             guy.beginPath();
@@ -45,11 +50,11 @@
             guy.fill();
         };
 
-	    var makeAllCircles = function(){
-			for (var cc = 0; cc < 7; cc++){
-				circles.push(makeCircle());
-			}
-		}
+	var makeAllCircles = function(){
+		for (var cc = 0; cc < 7; cc++){
+			circles.push(makeCircle(randomPosition(), randomPosition()));
+            }
+	}
 
         var drawAllCircles = function() {
             for (var cc = 0; cc < circles.length; cc++) {
@@ -59,14 +64,15 @@
         }
 
         window.onload = function() { //when the window loads, the functions that are called execute
-           // drawCircle(makeCircle());
-			makeAllCircles();
+          
+	    makeAllCircles();
             drawAllCircles();
 			
-			document.getElementById("circles").onclick = function(){
-                circles.push(makeCircle());
-                drawAllCircles();
-			};
+	    document.getElementById("circles").onclick = function(e) {
+	             console.log(e);
+		     circles.push(makeCircle(e.clientX, e.clientY));
+	             drawAllCircles();
+	    };
         };
                 
     </script>
