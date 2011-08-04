@@ -11,6 +11,8 @@
     <canvas id="circles" height="500" width="500" style="background:#000000">
         <p>get a better browser, idiot. Firefox is nice...</p>
     </canvas>
+    
+    <button type="button" id="reset">Reset</button>
 
 </body>
 
@@ -30,10 +32,10 @@
 		//this function stores the circle variable and all the elements needed to draw a random circle
         var makeCircle = function(x,y){ 
             var circle = {
-	        x: x, 
-            y: y,
-            radius: 5 + Math.floor(Math.random() * 100),
-            color: "rgb(" + Math.floor(Math.random() * 255)+ "," + Math.floor(Math.random() * 255)+ "," + Math.floor(Math.random() * 255) + ")"
+	        	x: x, 
+            	y: y,
+            	radius: 5 + Math.floor(Math.random() * 100),
+            	color: "rgb(" + Math.floor(Math.random() * 255)+ "," + Math.floor(Math.random() * 255)+ "," + Math.floor(Math.random() * 255) + ")"
             };
             
             return circle; //returns the circle variable, need this to see what we've done
@@ -59,10 +61,16 @@
 		};
 
         var drawAllCircles = function() {
+        	clear();
             for (var cc = 0; cc < circles.length; cc++) {
             	var circle = circles[cc];
                 drawCircle(circle);
             }
+        };
+        
+        var clear = function() {
+        	guy.clearRect(0, 0, canvas.width, canvas.height);
+        	console.log("clearing!");	
         };
 
 		//when the window loads, the functions that are called execute
@@ -70,6 +78,11 @@
           
 	   		makeAllCircles();
             drawAllCircles();
+			
+			document.getElementById("reset").onclick = function(e) {
+				circles = [];
+				drawAllCircles();//clears circles from this function
+			};
 			
 	    	document.getElementById("circles").onclick = function(e) {
 	             console.log(e);
