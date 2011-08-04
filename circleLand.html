@@ -13,6 +13,8 @@
     </canvas>
     
     <button type="button" id="move">Move</button>
+    <button type="button" id="start">Start Movin', Baby</button>
+    <button type="button" id="stop">Stop, Fool</button>
     <button type="button" id="reset">Reset</button>
 
 </body>
@@ -72,7 +74,16 @@
         var moveCircle = function(circle) { //pass in object you want to move
         	circle.x = circle.x + 5;
         	circle.y = circle.y + 5;
-        	console.log("move, bitch");
+        	console.log("move, bitch");//must be a string
+        };
+        
+        var startCircles = function(circle){
+        	var startMoving = function(){	
+        		for (var cc = 0; cc < circles.length; cc++){
+        			drawAllCircles(moveCircle(circles[cc]));	
+        		}
+        	};
+        	timerID = setInterval(startMoving, 50);
         };
         
         var clear = function() {
@@ -88,11 +99,18 @@
             drawAllCircles();
 			
 			document.getElementById("move").onclick = function(e) {
-				//moveCircle(circles[0]);
 				for (var cc = 0; cc < circles.length; cc++){
-					var circle = circles[cc];
 					drawAllCircles(moveCircle(circles[cc]));
 				}
+			};
+			
+			document.getElementById("start").onclick = function(e) {
+				startCircles();
+				drawAllCircles();
+			};	
+			
+			document.getElementById("stop").onclick = function(e) {
+				clearInterval(timerID);
 			};
 			
 			document.getElementById("reset").onclick = function(e) {
