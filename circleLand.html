@@ -36,7 +36,7 @@
 	        	x: x, 
             	y: y,
             	radius: 10 + Math.floor(Math.random() * 100),
-            	color: "rgb(" + Math.floor(Math.random() * 255)+ "," + Math.floor(Math.random() * 255)+ "," + Math.floor(Math.random() * 255) + ")"
+            	color: "rgb(" + Math.floor(Math.random() * 155)+ "," + Math.floor(Math.random() * 155)+ "," + Math.floor(Math.random() * 155) + ")"
             };
             
             return circle; //returns the circle variable, need this to see what we've done
@@ -70,8 +70,8 @@
         };
         		
         var moveCircle = function(circle) { //pass in object you want to move
-        	circle.x = circle.x + 20;
-        	circle.y = circle.y + 20;
+        	circle.x = circle.x + 5;
+        	circle.y = circle.y + 5;
         	console.log("move, bitch");
         };
         
@@ -88,13 +88,16 @@
             drawAllCircles();
 			
 			document.getElementById("move").onclick = function(e) {
-				moveCircle(circles[0]); //pick the circle you want to move, this is the first on the list
-				drawAllCircles(); //must draw circle after you make it move!!
-			}
+				//moveCircle(circles[0]);
+				for (var cc = 0; cc < circles.length; cc++){
+					var circle = circles[cc];
+					drawAllCircles(moveCircle(circles[cc]));
+				}
+			};
 			
 			document.getElementById("reset").onclick = function(e) {
-				circles = [];
-				drawAllCircles();//clears circles from this function
+				circles = []; //clears circles from list
+				drawAllCircles(); //clears circles from this function
 			};
 			
 	    	document.getElementById("circles").onclick = function(e) {
