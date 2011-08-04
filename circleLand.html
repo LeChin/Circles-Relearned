@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Circles for ALL! and all for circles</title>
+</head>
+<!-- put things in a function to make ease of calling later on-->
+<!-- try not to put too many things in the onload function-->
+
+<body>
+
+    <canvas id="circles" height="500" width="500" style="background:#000000">
+        <p>get a better browser, idiot. Firefox is nice...</p>
+    </canvas>
+    
+    <button type="button" id="move">Move</button>
+    <button type="button" id="reset">Reset</button>
+
+</body>
+
+    
+    <script type="text/javascript">
+        //gets canvas element from html, so we can use it
+        var canvas = document.getElementById('circles');
+        var guy = canvas.getContext('2d');
+		
+	
+		var circles = [];  //makes an array called circles  
+	
+		var randomPosition = function(){
+	    	return 10 + Math.floor(Math.random() * 491);
+		};
+		
+		//this function stores the circle variable and all the elements needed to draw a random circle
+        var makeCircle = function(x,y){ 
+            var circle = {
+	        	x: x, 
+            	y: y,
+            	radius: 10 + Math.floor(Math.random() * 100),
+            	color: "rgb(" + Math.floor(Math.random() * 255)+ "," + Math.floor(Math.random() * 255)+ "," + Math.floor(Math.random() * 255) + ")"
+            };
+            
+            return circle; //returns the circle variable, need this to see what we've done
+        };
+
+		
+		//when called below, this function draws a random circle using the makeCircle function above
+        var drawCircle = function(circle) { 
+            //console.log(Math.PI); //we can see what's going on in the browser with console
+            //console.log(circle);
+
+            guy.fillStyle = circle.color;
+            guy.beginPath();
+            guy.arc(circle.x, circle.y, circle.radius, 0, Math.PI*2, true);
+            guy.closePath();
+            guy.fill();
+        };
+
+		var makeAllCircles = function(){
+			for (var cc = 0; cc < 7; cc++){
+				circles.push(makeCircle(randomPosition(), randomPosition()));
+            }
+		};
+
+        var drawAllCircles = function() {
+        	clear();
+            for (var cc = 0; cc < circles.length; cc++) {
+            	var circle = circles[cc];
+                drawCircle(circle);
+            }
+        };
+        		
+        var moveCircle = function(circle) { //pass in object you want to move
+        	circle.x = circle.x + 20;
+        	circle.y = circle.y + 20;
+        	console.log("move, bitch");
+        };
+        
+        var clear = function() {
+        	guy.clearRect(0, 0, canvas.width, canvas.height);
+        	console.log("clearing!");	
+        };
+        	
+
+		//when the window loads, the functions that are called execute
+        window.onload = function() { 
+          
+	   		makeAllCircles();
+            drawAllCircles();
+			
+			document.getElementById("move").onclick = function(e) {
+				moveCircle(circles[0]); //pick the circle you want to move, this is the first on the list
+				drawAllCircles(); //must draw circle after you make it move!!
+			}
+			
+			document.getElementById("reset").onclick = function(e) {
+				circles = [];
+				drawAllCircles();//clears circles from this function
+			};
+			
+	    	document.getElementById("circles").onclick = function(e) {
+	             console.log(e);
+		    	 circles.push(makeCircle(e.clientX, e.clientY));
+	             drawAllCircles();
+	    	};
+        };
+                
+    </script>
+
+
+</html>
