@@ -2,21 +2,40 @@
 <html>
 <head>
     <title>Circles for ALL! and all for circles</title>
+    <style type="text/css">
+    	body{text-align:center;}
+    	#wrapper{
+    		width: 1000px;
+    		margin: 0 auto;
+    	}
+    	#content{position:absolute;}
+    	#buttons{
+    		width: 300px;
+    		position:relative;
+    			top: -30px;
+    			left: 300px;    			
+    	}
+    </style>
 </head>
 <!-- put things in a function to make ease of calling later on-->
 <!-- try not to put too many things in the onload function-->
 
 <body>
-
-    <canvas id="circles" height="500" width="500" style="background:#000000">
-        <p>get a better browser, idiot. Firefox is nice...</p>
-    </canvas>
-    
-    <button type="button" id="move">Move</button>
-    <button type="button" id="start">Start Movin', Baby</button>
-    <button type="button" id="stop">Stop, Fool</button>
-    <button type="button" id="reset">Reset</button>
-
+	<div id="wrapper">
+	<div id="content">
+	    <canvas id="circles" height="700" width="900" style="background:#000000">
+	        <p>get a better browser, idiot. Firefox is nice...</p>
+	    </canvas>
+	    
+	    <div id="buttons">
+	    	<button type="button" id="move" class="button">Move</button>
+	    	<button type="button" id="start" class="button">Start Movin', Baby</button>
+	    	<button type="button" id="stop" class="button">Stop, Fool</button>
+	    	<button type="button" id="reset" class="button">Reset</button>
+	    </div>
+	</div>
+	</div>
+	
 </body>
 
     
@@ -39,20 +58,19 @@
             	y: y,
             	dx: (Math.random() * 10) - 5, //negative number adds other directions
             	dy: (Math.random() * 10) - 5,
-            	draw: function(){
-            		guy.fillStyle = this.color;
+            	draw: function(){ //moved this from independent function, to part of object.
+					guy.fillStyle = this.color;
 					guy.beginPath();
 					guy.arc(this.x, this.y, this.radius, 0, Math.PI*2, true);
 					guy.closePath();
 					guy.fill();
             	},
             	radius: 10 + Math.floor(Math.random() * 100),
-            	color: "rgb(" + Math.floor(Math.random() * 155)+ "," + Math.floor(Math.random() * 155)+ "," + Math.floor(Math.random() * 155) + ")"
+            	color: "rgb(" + Math.floor(Math.random() * 55)+ "," + Math.floor(Math.random() * 155)+ "," + Math.floor(Math.random() * 255) + ")"
             };
             
             return circle; //returns the circle variable, need this to see what we've done
         };
-
 
 		var makeAllCircles = function(){
 			for (var cc = 0; cc < 7; cc++){
@@ -89,7 +107,7 @@
         	guy.clearRect(0, 0, canvas.width, canvas.height);
         	console.log("clearing!");	
         };
-        	
+			
 
 		//when the window loads, the functions that are called execute
         window.onload = function() { 
@@ -118,7 +136,14 @@
 			
 	    	document.getElementById("circles").onclick = function(e) {
 	             console.log(e);
-		    	 circles.push(makeCircle(e.clientX, e.clientY));
+		    	 circles.push(makeCircle(e.layerX, e.layerY)); //offsetX/Y doesn't work in Firefox
+		    	 
+		    	 var isFox = false;
+		    	 if(navigator.userAgent.indexOf("Firefox")!=-1) {
+				 	OffsetX = e.pageX - document.getElementById("circles").offsetLeft;
+				 	OffsetY = e.pageY - document.getElementById("circles").offsetTop;
+				 };
+
 	             drawAllCircles();
 	    	};
         };
