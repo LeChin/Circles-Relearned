@@ -23,14 +23,14 @@
 <body>
 	<div id="wrapper">
 	<div id="content">
-	    <canvas id="circles" height="700" width="900" style="background:#000000">
+	    <canvas id="circles" height="700" width="900" style="background:#999">
 	        <p>get a better browser, idiot. Firefox is nice...</p>
 	    </canvas>
 	    
 	    <div id="buttons">
-	    	<button type="button" id="move" class="button">Move</button>
-	    	<button type="button" id="start" class="button">Start Movin', Baby</button>
-	    	<button type="button" id="stop" class="button">Stop, Fool</button>
+	    	<button type="button" id="move" class="button">Move 1</button>
+	    	<button type="button" id="start" class="button">Start Movin'</button>
+	    	<button type="button" id="stop" class="button">Stop</button>
 	    	<button type="button" id="reset" class="button">Reset</button>
 	    </div>
 	</div>
@@ -58,20 +58,40 @@
             	y: y,
             	dx: (Math.random() * 10) - 5, //negative number adds other directions
             	dy: (Math.random() * 10) - 5,
+            	radius: 10 + Math.floor(Math.random() * 100),
+            	color: "rgb(" + Math.floor(Math.random() * 55)+ "," + Math.floor(Math.random() * 155)+ "," + Math.floor(Math.random() * 255) + ")",
             	draw: function(){ //moved this from independent function, to part of object.
 					guy.fillStyle = this.color;
 					guy.beginPath();
 					guy.arc(this.x, this.y, this.radius, 0, Math.PI*2, true);
 					guy.closePath();
 					guy.fill();
-            	},
-            	radius: 10 + Math.floor(Math.random() * 100),
-            	color: "rgb(" + Math.floor(Math.random() * 55)+ "," + Math.floor(Math.random() * 155)+ "," + Math.floor(Math.random() * 255) + ")"
+            	}
             };
-            
             return circle; //returns the circle variable, need this to see what we've done
         };
-
+        
+		var makeSquare = function(x,y,w,h){
+        	var square = {
+        		x: x,
+        		y: y,
+        		w: w,
+        		h: h,
+        		//dx: (Math.random() * 20) - 10,
+        		//dy: (Math.random() * 20) - 10,
+        		color: "rgb(" + Math.floor(Math.random() * 255)+ "," + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + ")",
+       			draw : function(){
+       				guy.fillStyle = this.color;
+					guy.rect (this.x, this.y, this.w, this.h);
+					guy.fill();
+       			}
+        	};
+        	
+            console.log("square");
+        	return square;
+        };
+        
+        
 		var makeAllCircles = function(){
 			for (var cc = 0; cc < 7; cc++){
 				circles.push(makeCircle(randomPosition(), randomPosition()));
@@ -111,7 +131,10 @@
 
 		//when the window loads, the functions that are called execute
         window.onload = function() { 
-          
+        
+        	var square = makeSquare(800, 100, 100, 100);
+        	square.draw();
+        	
 	   		makeAllCircles();
             drawAllCircles();
 			
@@ -137,12 +160,6 @@
 	    	document.getElementById("circles").onclick = function(e) {
 	             console.log(e);
 		    	 circles.push(makeCircle(e.layerX, e.layerY)); //offsetX/Y doesn't work in Firefox
-		    	 
-		    	 var isFox = false;
-		    	 if(navigator.userAgent.indexOf("Firefox")!=-1) {
-				 	OffsetX = e.pageX - document.getElementById("circles").offsetLeft;
-				 	OffsetY = e.pageY - document.getElementById("circles").offsetTop;
-				 };
 
 	             drawAllCircles();
 	    	};
