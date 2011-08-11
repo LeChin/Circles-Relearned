@@ -46,7 +46,8 @@
 		
 	
 		var circles = [];  //makes an array called circles  
-	
+		var square; 
+				
 		var randomPosition = function(){
 	    	return 10 + Math.floor(Math.random() * 491);
 		};
@@ -79,10 +80,12 @@
         		h: h,
         		//dx: (Math.random() * 20) - 10,
         		//dy: (Math.random() * 20) - 10,
-        		color: "rgb(" + Math.floor(Math.random() * 255)+ "," + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + ")",
-       			draw : function(){
+        		color: "rgb(" + Math.floor(Math.random() * 255)+ "," + Math.floor(Math.random() * 55) + "," + Math.floor(Math.random() * 255) + ")",
+       			draw: function(){
        				guy.fillStyle = this.color;
-					guy.rect (this.x, this.y, this.w, this.h);
+       				guy.beginPath();
+					guy.rect(this.x, this.y, this.w, this.h);
+					guy.closePath();
 					guy.fill();
        			}
         	};
@@ -132,8 +135,6 @@
 		//when the window loads, the functions that are called execute
         window.onload = function() { 
         
-        	var square = makeSquare(800, 100, 100, 100);
-        	square.draw();
         	
 	   		makeAllCircles();
             drawAllCircles();
@@ -163,6 +164,10 @@
 
 	             drawAllCircles();
 	    	};
+	    
+	    	
+        	var square = makeSquare(800, 100, 100, 100);
+        	square.draw();
         };
                 
     </script>
