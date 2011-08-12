@@ -52,36 +52,7 @@
 		var randomPosition = function(){
 	    	return 10 + Math.floor(Math.random() * 491);
 		};
-		 
-        
-		var makeSquare = function(x,y,w,h){
-        	var square = {
-        		x: x,
-        		y: y,
-        		w: w,
-        		h: h,
-        		//dx: (Math.random() * 20) - 10,
-        		//dy: (Math.random() * 20) - 10,
-        		color: "rgb(" + Math.floor(Math.random() * 255)+ "," + Math.floor(Math.random() * 55) + "," + Math.floor(Math.random() * 255) + ")",
-       			draw: function(){
-       				guy.clearRect(0,0,700,900);
-       				degrees += 0.016;
-       				
-       				guy.save();
-       				guy.translate(75,75);
-       				guy.rotate(degrees);
-       				guy.fillStyle = this.color;
-					guy.fillRect(-25, -25, 50, 50);
-					guy.restore();
-       			}
-        	};
-        	
-            console.log("square");
-        	return square;
-        };
-        
-        
-        square = makeSquare(800, 100, 100, 100);
+		
 		//this function stores the circle variable and all the elements needed to draw a random circle
         var makeCircle = function(x,y){ 
             var circle = {
@@ -105,7 +76,36 @@
             };
             return circle; //returns the circle variable, need this to see what we've done
         };
-       
+        
+        
+		var makeSquare = function(x,y,w,h){
+        	var square = {
+        		x: x,
+        		y: y,
+        		w: w,
+        		h: h,
+        		//dx: (Math.random() * 20) - 10,
+        		//dy: (Math.random() * 20) - 10,
+        		color: "rgb(" + Math.floor(Math.random() * 255)+ "," + Math.floor(Math.random() * 55) + "," + Math.floor(Math.random() * 255) + ")",
+       			draw: function(){
+       				guy.clearRect(700,900,700,900);
+       				degrees += 0.1;
+       				
+       				guy.save();
+       				guy.translate(75,75);
+       				guy.rotate(degrees);
+       				guy.fillStyle = this.color;
+					guy.fillRect(-25, -25, 50, 50);
+					guy.restore();
+       			}
+        	};
+        	
+            console.log("square");
+        	return square;
+        };
+        
+        
+        square = makeSquare(800, 100, 100, 100);
         
         
 		var makeAllCircles = function(){
