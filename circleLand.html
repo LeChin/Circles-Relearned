@@ -10,7 +10,7 @@
     	}
     	#content{position:absolute;}
     	#buttons{
-    		width: 300px;
+    		width: 320px;
     		position:relative;
     			top: -30px;
     			left: 300px;    			
@@ -46,7 +46,7 @@
 		
 	
 		var circles = [];  //makes an array called circles  
-		//var square = 
+		var square;
 				
 		var randomPosition = function(){
 	    	return 10 + Math.floor(Math.random() * 491);
@@ -67,10 +67,15 @@
 					guy.arc(this.x, this.y, this.radius, 0, Math.PI*2, true);
 					guy.closePath();
 					guy.fill();
-            	}
+            	},
+            	//move: function(){
+            		//this.x = this.x + this.dx;
+            		//this.y = this.y + this.dy;
+            	//}
             };
             return circle; //returns the circle variable, need this to see what we've done
         };
+        
         
 		var makeSquare = function(x,y,w,h){
         	var square = {
@@ -81,18 +86,23 @@
         		//dx: (Math.random() * 20) - 10,
         		//dy: (Math.random() * 20) - 10,
         		color: "rgb(" + Math.floor(Math.random() * 255)+ "," + Math.floor(Math.random() * 55) + "," + Math.floor(Math.random() * 255) + ")",
+        		rotate: 45,
        			draw: function(){
        				guy.fillStyle = this.color;
        				guy.beginPath();
 					guy.rect(this.x, this.y, this.w, this.h);
 					guy.closePath();
 					guy.fill();
+					//guy.rotate(45);
        			}
         	};
         	
             console.log("square");
         	return square;
         };
+        
+        
+        square = makeSquare(800, 100, 100, 100);
         
         
 		var makeAllCircles = function(){
@@ -107,7 +117,7 @@
             	var circle = circles[cc];
                 circle.draw();
             }
-            var square = makeSquare(800, 100, 100, 100);
+            //var square = makeSquare(800, 100, 100, 100); //techno chocolate
         	square.draw();
         };
         		
@@ -168,7 +178,6 @@
 	    	};
 	    
 	    	
-        	var square = makeSquare(800, 100, 100, 100);
         	square.draw();
         };
                 
