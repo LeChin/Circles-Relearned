@@ -47,7 +47,6 @@
 	
 		var circles = [];  //makes an array called circles  
 		var square;
-		var degrees = 0.0;
 				
 		var randomPosition = function(){
 	    	return 10 + Math.floor(Math.random() * 491);
@@ -69,10 +68,10 @@
 					guy.closePath();
 					guy.fill();
             	},
-            	//move: function(){
-            		//this.x = this.x + this.dx;
-            		//this.y = this.y + this.dy;
-            	//}
+            	move: function(){
+            		this.x += this.dx;
+            		this.y += this.dy;
+            	}
             };
             return circle; //returns the circle variable, need this to see what we've done
         };
@@ -84,19 +83,23 @@
         		y: y,
         		w: w,
         		h: h,
+        		theta: 0.0,
+        		dtheta: Math.random(),
         		//dx: (Math.random() * 20) - 10,
         		//dy: (Math.random() * 20) - 10,
         		color: "rgb(" + Math.floor(Math.random() * 255)+ "," + Math.floor(Math.random() * 55) + "," + Math.floor(Math.random() * 255) + ")",
        			draw: function(){
-       				guy.clearRect(700,900,700,900);
-       				degrees += 0.1;
+       				//guy.clearRect(700,900,700,900);
        				
        				guy.save();
-       				guy.translate(75,75);
-       				guy.rotate(degrees);
+       				guy.translate(this.x, this.y);
+       				guy.rotate(this.theta);
        				guy.fillStyle = this.color;
-					guy.fillRect(-25, -25, 50, 50);
+					guy.fillRect(-this.w / 2, -this.h / 2, this.w, this.h);
 					guy.restore();
+       			},
+       			move: function(){
+       				this.theta += this.dtheta;
        			}
         	};
         	
@@ -105,7 +108,7 @@
         };
         
         
-        square = makeSquare(800, 100, 100, 100);
+        square = makeSquare(600, 100, 50, 50);
         
         
 		var makeAllCircles = function(){
@@ -122,21 +125,21 @@
             }
             //var square = makeSquare(800, 100, 100, 100); //techno chocolate
         	square.draw();
+        	square.move();
         };
-        		
-        var moveCircle = function(circle) { //pass in object you want to move
-        	circle.x = circle.x + circle.dx;
-        	circle.y = circle.y + circle.dy;
-        	console.log("move, bitch, get out the way.");//must be a string
+        
+        var moveAllCircles = function(){
+        	for (var cc = 0; cc < circles.length; cc++){
+        		circles[cc].move();	
+        	}
         };
         
         var startCircles = function(circle){
         	var startMoving = function(){	
-        		for (var cc = 0; cc < circles.length; cc++){
-        			drawAllCircles(moveCircle(circles[cc]));
-        			
-        		}
+        		moveAllCircles();	
+        		drawAllCircles();
         	};
+        	
         	timerID = setInterval(startMoving, 50);
         };
         
@@ -155,9 +158,8 @@
             drawAllCircles();
 			
 			document.getElementById("move").onclick = function(e) {
-				for (var cc = 0; cc < circles.length; cc++){
-					drawAllCircles(moveCircle(circles[cc]));
-				}
+				moveAllCircles();
+				drawAllCircles();
 			};
 			
 			document.getElementById("start").onclick = function(e) {
@@ -180,8 +182,6 @@
 	             drawAllCircles();
 	    	};
 	    
-	    	
-        	square.draw();
         };
                 
     </script>
