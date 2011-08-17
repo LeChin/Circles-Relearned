@@ -81,7 +81,7 @@
         		//dy: (Math.random() * 20) - 10,
         		color: "rgb(" + Math.floor(Math.random() * 255)+ "," + Math.floor(Math.random() * 255) + "," + Math.floor(Math.random() * 255) + ")",
        			draw : function(){
-       				guy.fillStyle = "rgb(243,213,44)";
+       				guy.fillStyle = this.color;
 					guy.rect (this.x, this.y, this.w, this.h);
 					guy.fill();
        			}
@@ -132,7 +132,7 @@
 		//when the window loads, the functions that are called execute
         window.onload = function() { 
         
-        	var square = makeSquare(400, 100, 100, 30);
+        	var square = makeSquare(800, 100, 100, 100);
         	square.draw();
         	
 	   		makeAllCircles();
@@ -160,7 +160,6 @@
 	    	document.getElementById("circles").onclick = function(e) {
 	             console.log(e);
 		    	 circles.push(makeCircle(e.layerX, e.layerY)); //offsetX/Y doesn't work in Firefox
-		    	 circles.push(makeSquare(e.layerX, e.layerY, 100, 50));
 
 	             drawAllCircles();
 	    	};
