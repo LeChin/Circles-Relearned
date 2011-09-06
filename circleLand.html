@@ -3,20 +3,20 @@
 <head>
     <title>Circles for ALL! and all for circles</title>
     <script src="circle.js" type="text/javascript"></script>
-    <style type="text/css">
-    	body{text-align:center;}
-    	#wrapper{
-    		width: 1000px;
-    		margin: 0 auto;
-    	}
-    	#content{position:absolute;}
-    	#buttons{
-    		width: 320px;
-    		position:relative;
-    			top: -30px;
-    			left: 300px;    			
-    	}
-    </style>
+    <!--<style type="text/css">
+     body{text-align:center;}
+     #wrapper{
+     width: 1000px;
+     margin: 0 auto;
+     }
+     #content{position:absolute;}
+     #buttons{
+     width: 320px;
+     position:relative;
+     top: -30px;
+     left: 300px;
+     }
+    </style>-->
 </head>
 <!-- put things in a function to make ease of calling later on-->
 <!-- try not to put too many things in the onload function-->
@@ -24,16 +24,16 @@
 <body>
 	<div id="wrapper">
 		<div id="content">
-		    <canvas id="circles" height="700" width="900" style="background:#999">
-		        <p>get a better browser, idiot. Firefox is nice...</p>
-		    </canvas>
-		    
-		    <div id="buttons">
-		    	<button type="button" id="move" class="button">Move 1</button>
-		    	<button type="button" id="start" class="button">Start Movin'</button>
-		    	<button type="button" id="stop" class="button">Stop</button>
-		    	<button type="button" id="reset" class="button">Reset</button>
-		    </div>
+			<canvas id="circles" height="500" width="500" style="background:#999">
+				<p>get a better browser, idiot. Firefox is nice...</p>
+			</canvas>
+				
+			<div id="buttons">
+				<button type="button" id="move" class="button">Move 1</button>
+				<button type="button" id="start" class="button">Start Movin'</button>
+				<button type="button" id="stop" class="button">Stop</button>
+				<button type="button" id="reset" class="button">Reset</button>
+			</div>
 		</div>
 	</div>
 	
@@ -44,3 +44,4 @@
 </script>
 
 </html>
+
