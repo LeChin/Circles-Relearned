@@ -5,6 +5,8 @@ var circleLand = function(){
 	
 	
 	var shapes = [];
+	var circleCount = Math.random() * 80;
+	var squareCount = Math.random() * 60;
 	var square;
 	
 	var randomPosition = function(){
@@ -35,12 +37,13 @@ var circleLand = function(){
 	};
 	
 	
-	var makeSquare = function(x,y,w,h){
+	var makeSquare = function(x,y){
+		var dim = 20 + Math.floor(Math.random() * -10);
 		var square = {
 			x: x,
 			y: y,
-			w: w,
-			h: h,
+			w: dim,
+			h: dim,
 			theta: 0.0,
 			dtheta: Math.random(),
 			color: "rgb(" + Math.floor(Math.random() * 255)+ "," + Math.floor(Math.random() * 0) + "," + Math.floor(Math.random() * 255) + ")",
@@ -64,10 +67,15 @@ var circleLand = function(){
 	
 	square = makeSquare(randomPosition(), randomPosition(), 50, 50);
 	
-	var makeAllShapes = function(){
-		for (var i = 0; i < 100; i++){	
-			shapes.push(makeCircle(230, 220), makeSquare(randomPosition(), randomPosition(), 25, 25));
+	var makeShapes = function(count, make){
+		for (var i = 0; i < count; i++){
+			shapes.push(make());
 		}	
+	}
+	
+	var makeAllShapes = function(){	
+		makeShapes(circleCount, function(){return makeCircle(230, 220)});
+		makeShapes(squareCount, function(){return makeSquare(randomPosition(), randomPosition())});
 	};
 	
 	var drawAllShapes = function() {
