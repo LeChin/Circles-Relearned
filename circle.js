@@ -21,7 +21,10 @@ var circleLand = function(){
 			dx: (Math.random() * 10) - 5, //negative number adds other directions
 			dy: (Math.random() * 10) - 5,
 			radius: 10 + Math.floor(Math.random() * 10),
-			color: "rgb(" + Math.floor(Math.random() * 5)+ "," + Math.floor(Math.random() * 5)+ "," + Math.floor(Math.random() * 255) + ")",					draw: function(){ //moved this from independent function, to part of object.
+			color: "rgba(" + Math.floor(Math.random() * 5)+ "," + Math.floor(Math.random() * 5)+ "," + Math.floor(Math.random() * 255) + "," + "0.6 )",					
+			cycle: 0,
+			dcycle: Math.random() * 0.1,
+			draw: function(){ //moved this from independent function, to part of object.
 				guy.fillStyle = this.color;
 				guy.beginPath();
 				guy.arc(this.x, this.y, this.radius, 0, Math.PI*2, true);
@@ -31,6 +34,8 @@ var circleLand = function(){
 			move: function(){
 				this.x += this.dx;
 				this.y += this.dy;
+				this.cycle += this.dcycle;
+				this.radius += Math.sin(this.cycle) * 1;
 			}
 		};
 		return circle; //returns the circle variable, need this to see what we've done
